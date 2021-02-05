@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Training Data Structures and Algorithms</string>
+    <string name="data_structures">Data Structures</string>
+    <string name="types_data_structures">Types of Data Structures</string>
+    <string name="Array_List">ArrayList</string>
+    <string name="enter_values">Enter Values</string>
+    <string name="enter">Enter</string>
+    <string name="add">Add Value</string>
+    <string name="remove">Remove Value</string>
+    <string name="enter_index">Enter Index</string>
+    <string name="clear">Clear All Values</string>
+    <string name="Back">Back</string>
+</resources>
