@@ -19,11 +19,11 @@ import java.util.Arrays;
 public class DataStructures extends AppCompatActivity {
 
     Button buttonBack;
-    Button buttonCreate, buttonAddValue, buttonRemoveValue, buttonClear;
-    EditText editTextCreate, editTextAddValue, editTextRemoveIndex;
+    Button buttonAddValue, buttonAddValueIndex, buttonRemoveValueIndex, buttonClear , buttonShowMassive, buttonContains;
+    EditText editTextAddValue, editTextAddValueIndex, editTextRemoveValueIndex, editTextContains;
     TextView textViewOutput;
 
-    final ArrayList<String> list = new ArrayList<String>();
+    final ArrayList<String> list = new ArrayList<>();
     final String[] myString = {""};
     final String myStringG = "";
 
@@ -33,18 +33,21 @@ public class DataStructures extends AppCompatActivity {
         setContentView(R.layout.activity_data_structures);
 
         buttonBack = findViewById(R.id.button_back);
-        buttonCreate = findViewById(R.id.button_create);
         buttonAddValue = findViewById(R.id.button_add_value);
-        buttonRemoveValue = findViewById(R.id.button_remove_value);
+        buttonAddValueIndex = findViewById(R.id.button_add_value_under_index);
+        buttonRemoveValueIndex = findViewById(R.id.button_index_remove_value);
         buttonClear = findViewById(R.id.button_clear_values);
+        buttonContains = findViewById(R.id.button_contains);
+        buttonShowMassive = findViewById(R.id.button_show_massive);
 
-        editTextCreate = findViewById(R.id.edit_text_create);
+        editTextAddValue = findViewById(R.id.edit_text_add_value);
 //        final String[] myString = {""};
 
 //        elementData = ()
 //        list.add()
         editTextAddValue = findViewById(R.id.edit_text_add_value);
-        editTextRemoveIndex = findViewById(R.id.edit_text_index_remove);
+        editTextRemoveValueIndex = findViewById(R.id.edit_text_index_remove_value);
+        editTextContains = findViewById(R.id.edit_text_contains);
 
         textViewOutput = findViewById(R.id.text_view_output);
 
@@ -55,53 +58,68 @@ public class DataStructures extends AppCompatActivity {
             }
         });
 
-        buttonCreate.setOnClickListener(new View.OnClickListener() {
+        buttonAddValue.setOnClickListener(new View.OnClickListener() {
+            //нужно придумать как сделать так, чтобы он добавлял каждый элемент отдельно
             @Override
             public void onClick(View v) {
-                //где
-
-                myString[0] = editTextCreate.getText().toString();
-                list.add(editTextCreate.getText().toString());
-//                for (int i = 0; i < myString.length; i++) {
-//                    list.add(myString[i]);
-//                     в стринге 1 элемнт под 0 индексом, зачем тогда я это сделал?
-//                }
-                textViewOutput.setText(myString[0]);
-                editTextCreate.setText("");
+                list.add(editTextAddValue.getText().toString());
+                outputArray(editTextAddValue);
             }
         });
-
-//        list.size();
 
         //Добавить обработку пропуска
-        buttonAddValue.setOnClickListener(new View.OnClickListener() {
+        buttonAddValueIndex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String listToString = ""; //v1.0 - нет обработки пробелов
-                list.add(editTextAddValue.getText().toString());
-//                listToString = new String(String.valueOf(list.size()));
-//                textViewOutput.setText((CharSequence) list); //error hm-hm
-                String[] listToStringMassive = new String[list.size()]; //v2.01 - добавляются пробелы с запятыми    а еще можно юзать массив myString
-                for (int i = 0; i < list.size(); i++) {
-//                    listToString += list.get(i); //v1.0
-                    listToStringMassive[i] = list.get(i); //v2.01
-                }
-//                textViewOutput.setText(listToString); //v1.0        вывести конечный лист со всеми изменениями
-//                String[] listToStringMassive = list.toArray(new String[list.size()]); // v2.02 - работает также как и v2.01
-                textViewOutput.setText(Arrays.toString(listToStringMassive)); //v2.0
-                editTextAddValue.setText("");
+                //старый код сотворенный с самого начала
+////                String listToString = ""; //v1.0 - нет обработки пробелов
+//                list.add(editTextAddValueIndex.getText().toString());
+////                listToString = new String(String.valueOf(list.size()));
+////                textViewOutput.setText((CharSequence) list); //error hm-hm
+//                String[] listToStringMassive = new String[list.size()]; //v2.01 - добавляются пробелы с запятыми    а еще можно юзать массив myString
+//                for (int i = 0; i < list.size(); i++) {
+////                    listToString += list.get(i); //v1.0
+//                    listToStringMassive[i] = list.get(i); //v2.01
+//                }
+////                textViewOutput.setText(listToString); //v1.0        вывести конечный лист со всеми изменениями
+////                String[] listToStringMassive = list.toArray(new String[list.size()]); // v2.02 - работает также как и v2.01
+//                textViewOutput.setText(Arrays.toString(listToStringMassive)); //v2.0
+//                editTextAddValueIndex.setText("");
+
+                // новый код, надо создавать новый класс и методы get для него, займемся позже
+//                list.add(editTextAddValueIndex,);
+
             }
         });
 
-        buttonRemoveValue.setOnClickListener(new View.OnClickListener() {
+        buttonRemoveValueIndex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String myStringG = editTextRemoveIndex.getText().toString();
-//                int index = Integer.parseInt(myStringG);
-                final int index = Integer.parseInt(editTextRemoveIndex.getText().toString());
-                System.out.println(index);
-                list.remove((int) index); //не работает
-                outputArray();
+                 int index = Integer.parseInt(editTextRemoveValueIndex.getText().toString());
+                if(index <= list.size() && index != 0) {
+                    index -= 1;
+                    list.remove((int) index); //не работает
+                    outputArray(editTextRemoveValueIndex);
+                }
+                else textViewOutput.setText("Недопустимое значение");
+                editTextRemoveValueIndex.setText("");
+            }
+        });
+
+        buttonContains.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (list.contains(editTextContains.getText().toString()))
+                    textViewOutput.setText((String) "true");
+                else textViewOutput.setText((String) "false");
+                editTextContains.setText("");
+            }
+        });
+
+        buttonShowMassive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                outputArray(editTextAddValue);
             }
         });
 
@@ -109,18 +127,19 @@ public class DataStructures extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 list.clear();
-                outputArray();
+                outputArray(editTextAddValue);
             }
         });
 
     }
 
-    private void outputArray() {
+    private void outputArray(EditText editText) {
         String[] listToStringMassive = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             listToStringMassive[i] = list.get(i); //v2.01
         }
         textViewOutput.setText(Arrays.toString(listToStringMassive));
+        editText.setText("");
     }
 
 

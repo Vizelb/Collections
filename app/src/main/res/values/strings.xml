@@ -6,8 +6,11 @@
     <string name="enter_values">Enter Values</string>
     <string name="enter">Enter</string>
     <string name="add">Add Value</string>
-    <string name="remove">Remove Value</string>
+    <string name="add_under_index">Add Value under Index</string>
+    <string name="remove_under_index">Remove Value under Index</string>
+    <string name="contains">Contains</string>
     <string name="enter_index">Enter Index</string>
-    <string name="clear">Clear All Values</string>
+    <string name="show_massive">Show Massive</string>
+    <string name="clear_all">Clear All Values</string>
     <string name="Back">Back</string>
 </resources>
